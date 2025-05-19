@@ -4,7 +4,11 @@ import "./header.css";
 const Header = () => {
   return (
     <header className="header">
-      <h1>Botão Cidadão</h1>
+      <div className="header-content">
+        <h2>Bem-vindo</h2>
+        <h3>ao</h3>
+        <h1>Botão Cidadão</h1>
+      </div>
     </header>
   );
 };
