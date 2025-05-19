@@ -3,6 +3,7 @@ import InputText from './input';
 import Mensagem from './inputMensagem';
 import Button from './button';
 import Checkbox from './checkbox';
+import './forms.css';
 
 const Form = () => {
   const [titulo, setTitulo] = useState('');
@@ -24,7 +25,9 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={aoSubmeter}>
+    <form className="formulario" onSubmit={aoSubmeter}>
+      <h2>Formulário de Contato</h2>
+
       <InputText
         label="Nome"
         placeholder="Digite seu nome"
@@ -33,7 +36,7 @@ const Form = () => {
         aoAlterar={setTitulo}
       />
 
-      <div>
+      <div className="categorias">
         <Checkbox label="Sugestão" checked={categoria === 'Sugestão'} onChange={selecionarCategoria} />
         <Checkbox label="Reclamação" checked={categoria === 'Reclamação'} onChange={selecionarCategoria} />
         <Checkbox label="Denúncia" checked={categoria === 'Denúncia'} onChange={selecionarCategoria} />
@@ -44,7 +47,10 @@ const Form = () => {
         onChange={(e) => setMensagem(e.target.value)}
         placeholder="Escreva aqui..."
       />
-      <Button type="submit">Enviar</Button>
+
+      <div className="botao-form">
+        <Button type="submit">Enviar</Button>
+      </div>
     </form>
   );
 };

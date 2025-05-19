@@ -1,8 +1,10 @@
 import React from 'react';
+import './inputMensagem.css';
 
-const mensagem = ({ value, onChange, placeholder = 'Escreva aqui ...', className = '' }) => {
+const InputMensagem = ({ value, onChange, placeholder = 'Escreva aqui ...', className = '' }) => {
   return (
     <textarea
+      className={`textarea-mensagem ${className}`}
       value={value}
       onChange={onChange}
       placeholder={placeholder}
@@ -11,4 +13,4 @@ const mensagem = ({ value, onChange, placeholder = 'Escreva aqui ...', className
   );
 };
 
-export default mensagem;
+export default InputMensagem;
