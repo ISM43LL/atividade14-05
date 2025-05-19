@@ -9,15 +9,46 @@ const Form = () => {
   const [titulo, setTitulo] = useState('');
   const [mensagem, setMensagem] = useState('');
   const [categoria, setCategoria] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(null);
+  const [mensagemStatus, setMensagemStatus] = useState('');
 
-  const aoSubmeter = (evento) => {
+  const aoSubmeter = async (evento) => {
     evento.preventDefault();
+    setLoading(true);
+    setStatus(null);
+    setMensagemStatus('');
 
-    alert(`Nome: ${titulo}\nMensagem: ${mensagem}\nCategoria: ${categoria || 'Nenhuma selecionada'}`);
+    const dados = {
+      nome: titulo,
+      mensagem: mensagem,
+      categoria: categoria || 'Nenhuma selecionada',
+    };
 
-    setTitulo('');
-    setMensagem('');
-    setCategoria('');
+    try {
+      const resposta = await fetch('https://682b8cebd29df7a95be3c0c0.mockapi.io/api/v1/formularios', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dados),
+      });
+
+      if (!resposta.ok) throw new Error('Erro ao enviar formulário.');
+
+      setStatus('success');
+      setMensagemStatus('Formulário enviado com sucesso!');
+
+      // Limpar campos
+      setTitulo('');
+      setMensagem('');
+      setCategoria('');
+    } catch (erro) {
+      setStatus('error');
+      setMensagemStatus('Erro ao enviar o formulário. Tenta novamente.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const selecionarCategoria = (label) => {
@@ -48,8 +79,14 @@ const Form = () => {
         placeholder="Escreva aqui..."
       />
 
+      {status && (
+        <div className={`mensagem-status ${status}`}>
+          {mensagemStatus}
+        </div>
+      )}
+
       <div className="botao-form">
-        <Button type="submit">Enviar</Button>
+        <Button type="submit">{loading ? 'Enviando...' : 'Enviar'}</Button>
       </div>
     </form>
   );
