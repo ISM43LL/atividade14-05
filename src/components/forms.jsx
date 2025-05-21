@@ -1,17 +1,35 @@
-import React, { useState } from 'react';
-import InputText from './input';
+import React, { useEffect, useState } from 'react';
 import Mensagem from './inputMensagem';
 import Button from './button';
 import Checkbox from './checkbox';
 import './forms.css';
+import { useNavigate } from 'react-router-dom';
 
 const Form = () => {
-  const [titulo, setTitulo] = useState('');
   const [mensagem, setMensagem] = useState('');
   const [categoria, setCategoria] = useState('');
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null);
   const [mensagemStatus, setMensagemStatus] = useState('');
+  const [dadosUsuario, setDadosUsuario] = useState(null);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const dados = localStorage.getItem('dadosUsuario');
+
+    if (dados) {
+      setDadosUsuario(JSON.parse(dados));
+    } else {
+      navigate('/');
+    }
+  }, [navigate]);
+
+  const sair = () => {
+    localStorage.removeItem('cpfValido');
+    localStorage.removeItem('dadosUsuario');
+    navigate('/');
+  };
 
   const aoSubmeter = async (evento) => {
     evento.preventDefault();
@@ -20,7 +38,10 @@ const Form = () => {
     setMensagemStatus('');
 
     const dados = {
-      nome: titulo,
+      nome: dadosUsuario?.nome,
+      idade: dadosUsuario?.idade,
+      contato: dadosUsuario?.contato,
+      bairro: dadosUsuario?.bairro,
       mensagem: mensagem,
       categoria: categoria || 'Nenhuma selecionada',
     };
@@ -38,9 +59,6 @@ const Form = () => {
 
       setStatus('success');
       setMensagemStatus('Formulário enviado com sucesso!');
-
-      // Limpar campos
-      setTitulo('');
       setMensagem('');
       setCategoria('');
     } catch (erro) {
@@ -57,15 +75,16 @@ const Form = () => {
 
   return (
     <form className="formulario" onSubmit={aoSubmeter}>
-      <h2>Formulário de Contato</h2>
+      <h2>Formulário</h2>
 
-      <InputText
-        label="Nome"
-        placeholder="Digite seu nome"
-        required={true}
-        valor={titulo}
-        aoAlterar={setTitulo}
-      />
+      {dadosUsuario && (
+        <div className="info-usuario">
+          <p><strong>Nome:</strong> {dadosUsuario.nome}</p>
+          <p><strong>Idade:</strong> {dadosUsuario.idade}</p>
+          <p><strong>Contato:</strong> {dadosUsuario.contato}</p>
+          <p><strong>Bairro:</strong> {dadosUsuario.bairro}</p>
+        </div>
+      )}
 
       <div className="categorias">
         <Checkbox label="Sugestão" checked={categoria === 'Sugestão'} onChange={selecionarCategoria} />
@@ -88,6 +107,9 @@ const Form = () => {
       <div className="botao-form">
         <Button type="submit">{loading ? 'Enviando...' : 'Enviar'}</Button>
       </div>
+      <button type="button" className="botao-sair" onClick={sair}>
+  Sair
+</button>
     </form>
   );
 };

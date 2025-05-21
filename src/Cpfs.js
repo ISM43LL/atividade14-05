@@ -12,6 +12,13 @@ const cpfsValidos = [
       idade: 28,
       contato: '99876-5432',
       bairro: 'Jardins'
+    },
+    {
+      cpf:'12345678901',
+      nome:'admin',
+      idade:'18',
+      contato:'1234-45678',
+      bairro:'São José'
     }
   ];
   

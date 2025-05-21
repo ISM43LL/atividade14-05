@@ -10,9 +10,12 @@ const ValidarCPF = () => {
   const navigate = useNavigate();
 
   const validar = () => {
-    const encontrado = cpfsValidos.find((item) => item.cpf === cpf);
+    const cpfLimpo = cpf.replace(/\D/g, '');
+    const encontrado = cpfsValidos.find((item) => item.cpf === cpfLimpo);
+
     if (encontrado) {
       localStorage.setItem('cpfValido', 'true');
+      localStorage.setItem('dadosUsuario', JSON.stringify(encontrado));
       navigate('/formulario');
     } else {
       setErro('CPF não encontrado. Tenta novamente.');
