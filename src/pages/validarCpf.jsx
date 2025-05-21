@@ -25,7 +25,7 @@ const ValidarCPF = () => {
   return (
     <Layout>
       <div className="validador-cpf">
-        <h1>Para Prosseguir, Confira o seu CPF</h1>
+        <h1>Para Prosseguir, Confirme o seu CPF</h1>
         <h2>Validação de CPF</h2>
 
         <input

@@ -33,17 +33,24 @@ const Form = () => {
 
   const aoSubmeter = async (evento) => {
     evento.preventDefault();
-    setLoading(true);
     setStatus(null);
     setMensagemStatus('');
 
+    if (!dadosUsuario || !mensagem.trim() || !categoria) {
+      setStatus('error');
+      setMensagemStatus('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
+
+    setLoading(true);
+
     const dados = {
-      nome: dadosUsuario?.nome,
-      idade: dadosUsuario?.idade,
-      contato: dadosUsuario?.contato,
-      bairro: dadosUsuario?.bairro,
-      mensagem: mensagem,
-      categoria: categoria || 'Nenhuma selecionada',
+      nome: dadosUsuario.nome,
+      idade: dadosUsuario.idade,
+      contato: dadosUsuario.contato,
+      bairro: dadosUsuario.bairro,
+      categoria,
+      mensagem,
     };
 
     try {
@@ -58,7 +65,7 @@ const Form = () => {
       if (!resposta.ok) throw new Error('Erro ao enviar formulário.');
 
       setStatus('success');
-      setMensagemStatus('Formulário enviado com sucesso!');
+      setMensagemStatus('Enviado para Análise');
       setMensagem('');
       setCategoria('');
     } catch (erro) {
@@ -107,9 +114,10 @@ const Form = () => {
       <div className="botao-form">
         <Button type="submit">{loading ? 'Enviando...' : 'Enviar'}</Button>
       </div>
+
       <button type="button" className="botao-sair" onClick={sair}>
-  Sair
-</button>
+        Sair
+      </button>
     </form>
   );
 };
