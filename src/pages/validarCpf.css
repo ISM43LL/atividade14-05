@@ -1,0 +1,52 @@
+.validador-cpf {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .validador-cpf h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .validador-cpf h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #666;
+  }
+  
+  .validador-cpf input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .validador-cpf button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .validador-cpf button:hover {
+    background-color: #0056b3;
+  }
+  
+  .validador-cpf p {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  

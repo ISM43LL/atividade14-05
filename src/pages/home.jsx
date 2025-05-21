@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../components/layout';
 import Form from '../components/forms';
+import './home.css';
 
 const Home = () => {
   return (

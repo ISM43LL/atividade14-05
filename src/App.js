@@ -1,12 +1,21 @@
 import React from 'react';
-import './App.css';
-import Home from '../src/pages/home';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/home';
+import ValidarCPF from './pages/validarCpf';
+import RotaPrivada from './components/rota';
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<ValidarCPF />} />
+        <Route path="/formulario" element={
+          <RotaPrivada>
+            <Home />
+          </RotaPrivada>
+        } />
+      </Routes>
+    </Router>
   );
 }
 

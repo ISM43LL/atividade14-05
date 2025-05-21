@@ -1,0 +1,21 @@
+section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  section p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  
+  .mt-6 {
+    margin-top: 24px;
+  }
+  
